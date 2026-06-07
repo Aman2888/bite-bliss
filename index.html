@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bite Bliss – We Serve The Taste You Love</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --yellow: #F9A826;
+      --yellow-light: #FFF3DC;
+      --yellow-dark: #E08C00;
+      --orange: #F97316;
+      --white: #FFFFFF;
+      --cream: #FFFDF7;
+      --dark: #1A1A1A;
+      --gray: #6B7280;
+      --gray-light: #F5F5F5;
+    }
+    * { scroll-behavior: smooth; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+    h1,h2,h3 { font-family: 'Playfair Display', serif; }
+
+    /* ---- NAV ---- */
+    nav { background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); }
+    .nav-link {
+      font-weight: 500; font-size: 15px; color: #444;
+      position: relative; padding-bottom: 3px;
+      transition: color .2s;
+    }
+    .nav-link::after {
+      content:''; position:absolute; bottom:0; left:0;
+      width:0; height:2px; background:var(--yellow);
+      border-radius:2px; transition: width .3s;
+    }
+    .nav-link:hover { color: var(--yellow-dark); }
+    .nav-link:hover::after { width:100%; }
+
+    /* ---- HERO ---- */
+    #home {
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .15;
+      pointer-events: none;
+    }
+    .food-circle-img {
+      border-radius: 50%;
+      overflow: hidden;
+      border: 6px solid #fff;
+      box-shadow: 0 20px 60px rgba(249,168,38,.3);
+    }
+    .food-category-pill {
+      display: flex; align-items: center; gap: 10px;
+      background: #fff; border-radius: 50px;
+      padding: 8px 18px 8px 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      font-weight: 600; font-size: 14px;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+    .food-category-pill:hover { transform: translateX(4px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .pill-icon { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; }
+
+    /* ---- BUTTONS ---- */
+    .btn-yellow {
+      background: var(--yellow);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 50px;
+      transition: background .2s, transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(249,168,38,.4);
+    }
+    .btn-yellow:hover { background: var(--yellow-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(249,168,38,.5); }
+    .btn-outline {
+      border: 2px solid var(--yellow);
+      color: var(--yellow-dark);
+      font-weight: 700;
+      border-radius: 50px;
+      transition: all .2s;
+    }
+    .btn-outline:hover { background: var(--yellow); color: #fff; transform: translateY(-2px); }
+
+    /* ---- PRODUCT CARDS ---- */
+    .dish-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    }
+    .dish-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+    .dish-img-wrap { position: relative; overflow: hidden; }
+    .dish-img-wrap img { transition: transform .5s; }
+    .dish-card:hover .dish-img-wrap img { transform: scale(1.08); }
+    .add-cart-btn {
+      background: var(--yellow);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      border-radius: 50px;
+      padding: 6px 16px;
+      transition: background .2s, transform .2s;
+    }
+    .add-cart-btn:hover { background: var(--yellow-dark); transform: scale(1.05); }
+    .star { color: var(--yellow); font-size: 13px; }
+
+    /* ---- MENU TABS ---- */
+    .menu-tab {
+      border-radius: 50px; padding: 8px 22px;
+      font-weight: 600; font-size: 14px;
+      cursor: pointer; transition: all .2s;
+      border: 2px solid transparent;
+      background: #fff;
+      color: #555;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+    .menu-tab:hover, .menu-tab.active {
+      background: var(--yellow);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(249,168,38,.4);
+    }
+
+    /* ---- SECTION LABELS ---- */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow-light);
+      color: var(--yellow-dark);
+      font-weight: 700; font-size: 13px;
+      border-radius: 50px; padding: 6px 16px;
+      letter-spacing: .5px;
+    }
+
+    /* ---- TESTIMONIAL CARD ---- */
+    .review-card {
+      background: var(--yellow-light);
+      border-radius: 20px;
+      padding: 28px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(249,168,38,.2); }
+
+    /* ---- CHEF CARD ---- */
+    .chef-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.07);
+    }
+    .chef-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+
+    /* ---- SERVICE FEATURE ---- */
+    .feature-item { display: flex; align-items: flex-start; gap: 14px; }
+    .feature-icon { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+
+    /* ---- RESERVATION SECTION ---- */
+    #reservation { background: linear-gradient(135deg, #FFF3DC 0%, #FFF8EE 100%); position: relative; overflow: hidden; }
+
+    /* ---- SCROLL REVEAL ---- */
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity .65s, transform .65s; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* ---- FLOATING ANIM ---- */
+    .float-slow { animation: floatY 4s ease-in-out infinite; }
+    .float-fast { animation: floatY 2.8s ease-in-out infinite reverse; }
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+    /* ---- SCROLLERS ---- */
+    section { scroll-margin-top: 80px; }
+
+    /* ---- FOOTER ---- */
+    footer { background: var(--dark); color: #ccc; }
+    footer h4 { color: #fff; font-family: 'DM Sans', sans-serif; font-weight: 700; margin-bottom: 16px; }
+    footer a { color: #aaa; font-size: 14px; transition: color .2s; }
+    footer a:hover { color: var(--yellow); }
+
+    /* Progress bars */
+    .progress-bar { height: 6px; border-radius: 3px; background: #eee; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 3px; background: var(--yellow); animation: fillBar 1.4s ease forwards; }
+    @keyframes fillBar { from{width:0} }
+
+    /* Sticky nav shadow on scroll */
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.10); }
+
+    /* Mobile menu */
+    #mobile-nav { display:none; }
+    #mobile-nav.open { display:block; }
+
+    /* Counter animation */
+    .stat-num { font-family:'Playfair Display',serif; font-weight:900; color:var(--yellow-dark); font-size:2.5rem; line-height:1; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-shadow">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#home" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-lg font-black" style="background:var(--yellow);">🍔</div>
+      <span style="font-family:'Playfair Display',serif; font-weight:800; font-size:22px; color:var(--dark);">Bite Bliss</span>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-7">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#about" class="nav-link">About Us</a></li>
+      <li><a href="#menu" class="nav-link">Menu</a></li>
+      <li><a href="#reviews" class="nav-link">Reviews</a></li>
+      <li><a href="#blog" class="nav-link">Blog</a></li>
+      <li><a href="#contact" class="nav-link">Contacts</a></li>
+    </ul>
+
+    <!-- Right icons -->
+    <div class="flex items-center gap-3">
+      <button class="hidden md:flex items-center gap-2 text-gray-600 hover:text-yellow-500 transition" aria-label="Cart">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </button>
+      <a href="#reservation" class="btn-yellow hidden md:inline-block px-5 py-2 text-sm">Reserve Table</a>
+      <!-- Hamburger -->
+      <button id="hamburger" class="md:hidden text-gray-600 hover:text-yellow-500 transition">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-nav" class="md:hidden bg-white border-t border-gray-100 px-5 pb-5">
+    <ul class="pt-4 space-y-3">
+      <li><a href="#home" class="nav-link block" onclick="closeMob()">Home</a></li>
+      <li><a href="#about" class="nav-link block" onclick="closeMob()">About Us</a></li>
+      <li><a href="#menu" class="nav-link block" onclick="closeMob()">Menu</a></li>
+      <li><a href="#reviews" class="nav-link block" onclick="closeMob()">Reviews</a></li>
+      <li><a href="#blog" class="nav-link block" onclick="closeMob()">Blog</a></li>
+      <li><a href="#contact" class="nav-link block" onclick="closeMob()">Contacts</a></li>
+      <li><a href="#reservation" class="btn-yellow block text-center py-2 mt-2" onclick="closeMob()">Reserve Table</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="pt-28 pb-16 px-4 min-h-screen flex items-center relative">
+  <!-- blobs -->
+  <div class="hero-blob w-96 h-96 -top-20 -left-20" style="background:var(--yellow);"></div>
+  <div class="hero-blob w-72 h-72 top-10 right-0" style="background:var(--orange);"></div>
+
+  <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+    <!-- Left text -->
+    <div class="reveal">
+      <div class="section-label mb-5">🍽️ &nbsp;Premium Restaurant</div>
+      <h1 class="leading-tight mb-5" style="font-size:clamp(2.8rem,6vw,4.5rem);">
+        We Serve The Taste<br><span style="color:var(--yellow);">You Love</span> 😍
+      </h1>
+      <p class="text-gray-500 text-lg leading-relaxed mb-8 max-w-md">
+        A restaurant typically serves food and drinks, in addition to light refreshments such as baked goods or snacks. The term comes from the word meaning <em>"to restore."</em>
+      </p>
+      <div class="flex flex-wrap gap-4 mb-8">
+        <a href="#menu" class="btn-yellow px-8 py-3 text-base">Explore Food</a>
+        <button class="btn-outline px-8 py-3 text-base flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Search
+        </button>
+      </div>
+      <!-- Stats -->
+      <div class="flex gap-8">
+        <div>
+          <div class="stat-num">12K+</div>
+          <p class="text-gray-500 text-sm font-medium">Happy Customers</p>
+        </div>
+        <div>
+          <div class="stat-num">250+</div>
+          <p class="text-gray-500 text-sm font-medium">Menu Items</p>
+        </div>
+        <div>
+          <div class="stat-num">15+</div>
+          <p class="text-gray-500 text-sm font-medium">Award Winning</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: circular food image + category pills -->
+    <div class="flex items-center gap-6 justify-center md:justify-end reveal" style="transition-delay:.15s;">
+      <div class="food-circle-img float-slow w-64 h-64 md:w-80 md:h-80 flex-shrink-0">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Hero food" class="w-full h-full object-cover"/>
+      </div>
+      <!-- Pills -->
+      <div class="flex flex-col gap-3">
+        <div class="food-category-pill">
+          <div class="pill-icon" style="background:#FFF3DC;">🍝</div> Dishes
+        </div>
+        <div class="food-category-pill">
+          <div class="pill-icon" style="background:#FFF3DC;">🍰</div> Dessert
+        </div>
+        <div class="food-category-pill">
+          <div class="pill-icon" style="background:#FFF3DC;">🥤</div> Drinks
+        </div>
+        <div class="food-category-pill">
+          <div class="pill-icon" style="background:#FFF3DC;">🍽️</div> Platter
+        </div>
+        <div class="food-category-pill">
+          <div class="pill-icon" style="background:#FFF3DC;">🥜</div> Snacks
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== POPULAR DISHES ===== -->
+<section id="popular" class="py-16 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center justify-between mb-10">
+      <div class="reveal">
+        <div class="section-label mb-3">⭐ &nbsp;Fan Favourites</div>
+        <h2 class="text-3xl md:text-4xl">Popular Dishes</h2>
+      </div>
+      <div class="flex gap-2 reveal" style="transition-delay:.1s;">
+        <button class="w-10 h-10 rounded-full border-2 border-yellow-400 flex items-center justify-center text-yellow-500 hover:bg-yellow-400 hover:text-white transition">&#8592;</button>
+        <button class="w-10 h-10 rounded-full flex items-center justify-center text-white transition" style="background:var(--yellow);">&#8594;</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <!-- Dish Card template x4 -->
+      <div class="dish-card reveal" style="transition-delay:.0s;">
+        <div class="dish-img-wrap" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=300&q=80" alt="Pasta" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-4">
+          <h3 style="font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700;" class="mb-1">Pasta Primavera</h3>
+          <div class="flex mb-2">
+            <span class="star">★★★★★</span>
+          </div>
+          <p class="text-gray-400 text-xs mb-3">Fresh vegetables tossed with al dente pasta in a light sauce.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-black" style="color:var(--yellow-dark); font-size:16px;">₨35.00</span>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" style="transition-delay:.1s;">
+        <div class="dish-img-wrap" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?w=300&q=80" alt="Fries" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-4">
+          <h3 style="font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700;" class="mb-1">French Fries</h3>
+          <div class="flex mb-2"><span class="star">★★★★☆</span></div>
+          <p class="text-gray-400 text-xs mb-3">Crispy golden fries seasoned with herbs and sea salt.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-black" style="color:var(--yellow-dark); font-size:16px;">₨65.00</span>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" style="transition-delay:.2s;">
+        <div class="dish-img-wrap" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300&q=80" alt="Shawarma" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-4">
+          <h3 style="font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700;" class="mb-1">Chicken Shawarma</h3>
+          <div class="flex mb-2"><span class="star">★★★★★</span></div>
+          <p class="text-gray-400 text-xs mb-3">Tender marinated chicken wrapped in warm flatbread.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-black" style="color:var(--yellow-dark); font-size:16px;">₨35.00</span>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" style="transition-delay:.3s;">
+        <div class="dish-img-wrap" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=300&q=80" alt="Fish Curry" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-4">
+          <h3 style="font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700;" class="mb-1">Fish Curry</h3>
+          <div class="flex mb-2"><span class="star">★★★★☆</span></div>
+          <p class="text-gray-400 text-xs mb-3">Aromatic spiced fish curry slow cooked to perfection.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-black" style="color:var(--yellow-dark); font-size:16px;">₨35.00</span>
+            <button class="add-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT / MULTIPLE SERVICE ===== -->
+<section id="about" class="py-20 px-4" style="background:var(--cream);">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <!-- Chef image -->
+    <div class="flex justify-center reveal">
+      <div class="relative">
+        <div class="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl float-slow">
+          <img src="https://visvergemedia.com/wp-content/uploads/2022/03/19.jpg" alt="Chef" class="w-full h-full object-cover"/>
+        </div>
+        <!-- Floating badge -->
+        <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
+          <div class="text-3xl">👨‍🍳</div>
+          <div>
+            <p class="font-black text-lg" style="color:var(--yellow-dark);">15+ Years</p>
+            <p class="text-gray-500 text-xs font-medium">Expert Chefs</p>
+          </div>
+        </div>
+        <div class="absolute -top-4 -left-4 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
+          <div class="text-3xl">🏆</div>
+          <div>
+            <p class="font-black text-lg" style="color:var(--yellow-dark);">Award</p>
+            <p class="text-gray-500 text-xs font-medium">Best Restaurant</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <div class="reveal" style="transition-delay:.15s;">
+      <div class="section-label mb-4">🌟 &nbsp;Why Choose Us</div>
+      <h2 class="text-3xl md:text-4xl mb-6 leading-tight">We Are More Than<br><span style="color:var(--yellow);">Multiple Service</span></h2>
+      <p class="text-gray-500 leading-relaxed mb-8">
+        A restaurant typically serves food and drinks, in addition to light refreshments such as baked goods or snacks. We pride ourselves on delivering an unforgettable dining experience every single time.
+      </p>
+
+      <div class="grid grid-cols-2 gap-5 mb-8">
+        <div class="feature-item">
+          <div class="feature-icon" style="background:var(--yellow-light);">🛵</div>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Online Order</p>
+            <p class="text-gray-400 text-xs">Order from anywhere</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon" style="background:var(--yellow-light);">📋</div>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Pre-Reservation</p>
+            <p class="text-gray-400 text-xs">Book your table early</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon" style="background:var(--yellow-light);">⏰</div>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">24/7 Service</p>
+            <p class="text-gray-400 text-xs">Always here for you</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon" style="background:var(--yellow-light);">🌿</div>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Organised Foodie Place</p>
+            <p class="text-gray-400 text-xs">Clean & cozy ambiance</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon" style="background:var(--yellow-light);">🧹</div>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Clean Kitchen</p>
+            <p class="text-gray-400 text-xs">Hygienic preparation</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon" style="background:var(--yellow-light);">⭐</div>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Super Chefs</p>
+            <p class="text-gray-400 text-xs">World-class culinary talent</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="btn-yellow inline-block px-8 py-3">About Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REGULAR MENU PACK ===== -->
+<section id="menu" class="py-20 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <div class="section-label mb-3 mx-auto" style="display:inline-flex;">🍴 &nbsp;Our Menu</div>
+      <h2 class="text-3xl md:text-4xl mt-2">Our Regular Menu Pack</h2>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex flex-wrap gap-3 justify-center mb-10 reveal">
+      <button class="menu-tab active" onclick="setTab(this,'special')">Special Foods</button>
+      <button class="menu-tab" onclick="setTab(this,'mexican')">Mexican</button>
+      <button class="menu-tab" onclick="setTab(this,'italian')">Italian</button>
+      <button class="menu-tab" onclick="setTab(this,'japanese')">Japanese</button>
+      <button class="menu-tab" onclick="setTab(this,'drinks')">Drinks</button>
+      <button class="menu-tab" onclick="setTab(this,'lunch')">Lunch</button>
+      <button class="menu-tab" onclick="setTab(this,'more')">More Items ▾</button>
+    </div>
+
+    <!-- Menu grid (dynamic) -->
+    <div id="menuGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 transition-all duration-300"></div>
+  </div>
+</section>
+
+<!-- ===== RESERVATION ===== -->
+<section id="reservation" class="py-20 px-4">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="reveal">
+      <div class="section-label mb-5">📅 &nbsp;Book a Seat</div>
+      <h2 class="text-3xl md:text-4xl mb-5 leading-tight">Do You Have Any Dinner<br>Plan Today? <span style="color:var(--yellow);">Reserve Your Table</span></h2>
+      <p class="text-gray-500 mb-6 leading-relaxed">Make online reservations, read restaurant reviews from diners, and earn points towards free meals. OpenTable is a real-time online reservation service.</p>
+      <a href="#reservation" class="btn-yellow inline-block px-8 py-3">Make Reservation</a>
+    </div>
+    <!-- Reservation Form -->
+    <div class="bg-white rounded-3xl shadow-xl p-8 reveal" style="transition-delay:.15s;">
+      <h3 style="font-family:'DM Sans',sans-serif; font-weight:800; font-size:20px;" class="mb-6 text-gray-800">Book Your Table</h3>
+      <form onsubmit="return false;" class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-semibold text-gray-600 block mb-1">Your Name</label>
+            <input type="text" placeholder="Ahmed Khan" class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition"/>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-600 block mb-1">Phone</label>
+            <input type="tel" placeholder="+92 300..." class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition"/>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-semibold text-gray-600 block mb-1">Date</label>
+            <input type="date" class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition"/>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-600 block mb-1">Time</label>
+            <input type="time" class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition"/>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-600 block mb-1">Number of Guests</label>
+          <select class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition text-gray-700">
+            <option>1 Guest</option>
+            <option>2 Guests</option>
+            <option>3-4 Guests</option>
+            <option>5-6 Guests</option>
+            <option>7+ Guests</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-600 block mb-1">Special Request</label>
+          <textarea placeholder="Any dietary needs or preferences..." rows="3" class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn-yellow w-full py-3 font-bold text-base">Confirm Reservation 🍽️</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews" class="py-20 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center justify-between mb-10">
+      <div class="reveal">
+        <div class="section-label mb-3">💬 &nbsp;Testimonials</div>
+        <h2 class="text-3xl md:text-4xl">What Our Customer Says?</h2>
+      </div>
+      <div class="flex gap-2 reveal" style="transition-delay:.1s;">
+        <button class="w-10 h-10 rounded-full border-2 border-yellow-400 flex items-center justify-center text-yellow-500 hover:bg-yellow-400 hover:text-white transition">&#8592;</button>
+        <button class="w-10 h-10 rounded-full flex items-center justify-center text-white transition" style="background:var(--yellow);">&#8594;</button>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="review-card reveal" style="transition-delay:.0s;">
+        <div class="flex mb-3"><span class="star">★★★★★</span></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-5">"This place is great! Atmosphere is chill and cool but the staff is also really friendly. They know what they're doing and what they're talking about, and you can tell making the customers happy is their main priority."</p>
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&q=80" alt="Reviewer" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow"/>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Savannah Nguyen</p>
+            <p class="text-gray-400 text-xs">Regular Customer</p>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal" style="transition-delay:.15s;">
+        <div class="flex mb-3"><span class="star">★★★★★</span></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-5">"Best food in the city! Every dish is crafted with love and precision. The Chicken Shawarma is absolutely to die for. I keep coming back every single week. Highly recommend to everyone!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&q=80" alt="Reviewer" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow"/>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Marcus Thompson</p>
+            <p class="text-gray-400 text-xs">Food Blogger</p>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal" style="transition-delay:.3s;">
+        <div class="flex mb-3"><span class="star">★★★★★</span></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-5">"The reservation system was super easy and the table was ready exactly on time. Food was fresh and delicious. The ambiance is perfect for a family dinner. Will definitely visit again!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&q=80" alt="Reviewer" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow"/>
+          <div>
+            <p class="font-bold text-gray-800 text-sm">Layla Hassan</p>
+            <p class="text-gray-400 text-xs">Loyal Customer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEET OUR CHEFS ===== -->
+<section id="chefs" class="py-20 px-4" style="background:var(--cream);">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center justify-between mb-10">
+      <div class="reveal">
+        <div class="section-label mb-3">👨‍🍳 &nbsp;Our Team</div>
+        <h2 class="text-3xl md:text-4xl">Meet Our Chefs</h2>
+      </div>
+      <div class="flex gap-2 reveal" style="transition-delay:.1s;">
+        <button class="w-10 h-10 rounded-full border-2 border-yellow-400 flex items-center justify-center text-yellow-500 hover:bg-yellow-400 hover:text-white transition">&#8592;</button>
+        <button class="w-10 h-10 rounded-full flex items-center justify-center text-white transition" style="background:var(--yellow);">&#8594;</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="chef-card reveal" style="transition-delay:.0s;">
+        <img src="https://visvergemedia.com/wp-content/uploads/2022/03/19.jpg" alt="Chef 1" class="w-full h-full object-cover" style="height:290px;"/>
+        <div class="p-4">
+          <p class="font-bold text-gray-800">Savannah Nguyen</p>
+          <p class="text-sm" style="color:var(--yellow-dark);">Head Chef</p>
+        </div>
+      </div>
+      <div class="chef-card reveal" style="transition-delay:.1s;">
+        <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=300&q=80" alt="Chef 2" class="w-full h-full object-cover" style="height:290px;"/>
+        <div class="p-4">
+          <p class="font-bold text-gray-800">Esther Howard</p>
+          <p class="text-sm" style="color:var(--yellow-dark);">Pastry Chef</p>
+        </div>
+      </div>
+      <div class="chef-card reveal" style="transition-delay:.2s;">
+        <img src="https://cdn.prod.website-files.com/67c0036d59183921f0311a84/67c924a90b257dd9decdcd8b_passion-img-1.png" alt="Chef 3" class="w-full object-cover" style="height:290px;"/>
+        <div class="p-4">
+          <p class="font-bold text-gray-800">Marvin McKinney</p>
+          <p class="text-sm" style="color:var(--yellow-dark);">Grill Specialist</p>
+        </div>
+      </div>
+      <div class="chef-card reveal" style="transition-delay:.3s;">
+        <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=300&q=80" alt="Chef 4" class="w-full object-cover" style="height:290px;"/>
+        <div class="p-4">
+          <p class="font-bold text-gray-800">Albert Flores</p>
+          <p class="text-sm" style="color:var(--yellow-dark);">Sous Chef</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section id="blog" class="py-20 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <div class="section-label mb-3 mx-auto" style="display:inline-flex;">📝 &nbsp;Our Blog</div>
+      <h2 class="text-3xl md:text-4xl mt-2">Food Stories & Tips</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="rounded-3xl overflow-hidden shadow-md reveal" style="transition-delay:.0s; background:#fff;">
+        <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=400&q=80" alt="Blog 1" class="w-full object-cover" style="height:200px;"/>
+        <div class="p-6">
+          <span class="text-xs font-bold px-3 py-1 rounded-full text-white" style="background:var(--yellow);">Food Tips</span>
+          <h3 style="font-family:'DM Sans',sans-serif; font-weight:800; font-size:16px;" class="mt-3 mb-2 text-gray-800">10 Secret Spices That Make Our Food Irresistible</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Discover the carefully selected spice combinations our chefs use to create magic in every dish...</p>
+          <a href="#blog" class="text-sm font-bold" style="color:var(--yellow-dark);">Read More →</a>
+        </div>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-md reveal" style="transition-delay:.15s; background:#fff;">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80" alt="Blog 2" class="w-full object-cover" style="height:200px;"/>
+        <div class="p-6">
+          <span class="text-xs font-bold px-3 py-1 rounded-full text-white" style="background:var(--orange);">Behind The Scenes</span>
+          <h3 style="font-family:'DM Sans',sans-serif; font-weight:800; font-size:16px;" class="mt-3 mb-2 text-gray-800">A Day In The Life Of Our Head Chef</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Follow Chef Savannah through an intense prep morning, from market sourcing to final plating...</p>
+          <a href="#blog" class="text-sm font-bold" style="color:var(--yellow-dark);">Read More →</a>
+        </div>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-md reveal" style="transition-delay:.3s; background:#fff;">
+        <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400&q=80" alt="Blog 3" class="w-full object-cover" style="height:200px;"/>
+        <div class="p-6">
+          <span class="text-xs font-bold px-3 py-1 rounded-full text-white" style="background:var(--yellow-dark);">Recipes</span>
+          <h3 style="font-family:'DM Sans',sans-serif; font-weight:800; font-size:16px;" class="mt-3 mb-2 text-gray-800">How To Make Perfect Shawarma At Home</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Our award-winning Shawarma recipe revealed! Follow these steps for restaurant-quality results...</p>
+          <a href="#blog" class="text-sm font-bold" style="color:var(--yellow-dark);">Read More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APP DOWNLOAD ===== -->
+<section class="py-20 px-4" style="background: linear-gradient(135deg, var(--yellow-light) 0%, #fff 100%);">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="reveal">
+      <div class="section-label mb-5">📱 &nbsp;Download App</div>
+      <h2 class="text-3xl md:text-4xl mb-4 leading-tight">Never Feel Hungry!<br>Download Our Mobile App<br><span style="color:var(--yellow);">Enjoy Delicious Foods</span></h2>
+      <p class="text-gray-500 mb-8 max-w-md">Make online reservations, read restaurant reviews from diners, and earn points towards free meals. Our app is a real-time online reservation service.</p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#" class="flex items-center gap-3 bg-black text-white px-6 py-3 rounded-2xl hover:bg-gray-800 transition">
+          <span class="text-2xl">🍎</span>
+          <div><p class="text-xs text-gray-400">Download on the</p><p class="font-bold text-sm">App Store</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 bg-black text-white px-6 py-3 rounded-2xl hover:bg-gray-800 transition">
+          <span class="text-2xl">▶</span>
+          <div><p class="text-xs text-gray-400">Get it on</p><p class="font-bold text-sm">Google Play</p></div>
+        </a>
+      </div>
+    </div>
+    <!-- Phone mockup -->
+    <div class="flex justify-center reveal" style="transition-delay:.15s;">
+      <div class="relative float-slow">
+        <div class="w-52 h-96 md:w-64 md:h-[480px] bg-gray-900 rounded-[3rem] shadow-2xl overflow-hidden border-4 border-gray-800 flex flex-col">
+          <div class="flex-1 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80" alt="App preview" class="w-full h-full object-cover"/>
+          </div>
+          <div class="p-4 bg-white">
+            <p style="font-family:'Playfair Display',serif; font-weight:700; font-size:13px; color:var(--dark);">We Serve The Taste<br><span style="color:var(--yellow);">You Love 😍</span></p>
+          </div>
+        </div>
+        <!-- Screen glow -->
+        <div class="absolute inset-0 rounded-[3rem] pointer-events-none" style="box-shadow: 0 0 60px rgba(249,168,38,.2);"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="py-20 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <div class="section-label mb-3 mx-auto" style="display:inline-flex;">📍 &nbsp;Find Us</div>
+      <h2 class="text-3xl md:text-4xl mt-2">Get In Touch</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <div class="reveal">
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="feature-icon" style="background:var(--yellow-light); font-size:22px;">📍</div>
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Our Location</p>
+              <p class="text-gray-500 text-sm">123 Food Street, Sadiqabad,<br>Punjab, Pakistan</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="feature-icon" style="background:var(--yellow-light); font-size:22px;">📞</div>
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Phone Number</p>
+              <p class="text-gray-500 text-sm">+92 300 1234567<br>+92 321 7654321</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="feature-icon" style="background:var(--yellow-light); font-size:22px;">✉️</div>
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Email Us</p>
+              <p class="text-gray-500 text-sm">hello@bitebliss.pk<br>reservations@bitebliss.pk</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="feature-icon" style="background:var(--yellow-light); font-size:22px;">⏰</div>
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Opening Hours</p>
+              <p class="text-gray-500 text-sm">Mon–Fri: 11am – 11pm<br>Sat–Sun: 10am – 12am</p>
+            </div>
+          </div>
+        </div>
+        <!-- Social -->
+        <div class="mt-8 flex gap-3">
+          <a href="#" class="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold transition hover:scale-110" style="background:var(--yellow);">f</a>
+          <a href="#" class="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold transition hover:scale-110" style="background:var(--orange);">in</a>
+          <a href="#" class="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold transition hover:scale-110" style="background:#1DA1F2;">tw</a>
+          <a href="#" class="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold transition hover:scale-110" style="background:#E1306C;">ig</a>
+        </div>
+      </div>
+
+      <form onsubmit="return false;" class="space-y-4 reveal" style="transition-delay:.15s;">
+        <div class="grid grid-cols-2 gap-4">
+          <input type="text" placeholder="Your Name" class="border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition"/>
+          <input type="email" placeholder="Your Email" class="border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition"/>
+        </div>
+        <input type="text" placeholder="Subject" class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition"/>
+        <textarea rows="5" placeholder="Your Message..." class="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition resize-none"></textarea>
+        <button type="submit" class="btn-yellow w-full py-3 font-bold text-base">Send Message 🚀</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="py-14 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-5 gap-8 mb-12">
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-lg font-black" style="background:var(--yellow);">🍔</div>
+          <span style="font-family:'Playfair Display',serif; font-weight:800; font-size:22px; color:#fff;">Bite Bliss</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-5 max-w-xs">We serve the taste you love. A premium dining experience crafted with passion, fresh ingredients, and culinary excellence.</p>
+        <div>
+          <p class="text-white text-sm font-bold mb-3">Subscribe Our Newsletter</p>
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="flex-1 bg-gray-800 text-white text-sm px-4 py-2 rounded-l-xl outline-none border border-gray-700 focus:border-yellow-400"/>
+            <button class="btn-yellow px-5 py-2 rounded-r-xl text-sm font-bold">Go</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4>Service</h4>
+        <ul class="space-y-2">
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#reservation">Pre Reservation</a></li>
+          <li><a href="#about">24/7 Service</a></li>
+          <li><a href="#blog">Food Blog</a></li>
+          <li><a href="#chefs">Super Chefs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Help</h4>
+        <ul class="space-y-2">
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#reservation">Reservation</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-gray-500 text-sm">© 2025 Bite Bliss Restaurant. All rights reserved.</p>
+      <div class="flex gap-3">
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center transition hover:scale-110" style="background:var(--yellow); color:#fff; font-size:13px; font-weight:700;">f</a>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center transition hover:scale-110" style="background:var(--orange); color:#fff; font-size:13px; font-weight:700;">in</a>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center transition hover:scale-110" style="background:#1DA1F2; color:#fff; font-size:13px; font-weight:700;">tw</a>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center transition hover:scale-110" style="background:#E1306C; color:#fff; font-size:13px; font-weight:700;">ig</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav shadow
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+
+    // Active nav link
+    const sections = document.querySelectorAll('section[id]');
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    document.querySelectorAll('.nav-link').forEach(l => {
+      l.style.color = '';
+      if (l.getAttribute('href') === '#' + cur) l.style.color = 'var(--yellow-dark)';
+    });
+  });
+
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.toggle('open');
+  });
+  function closeMob() { document.getElementById('mobile-nav').classList.remove('open'); }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ===== MENU DATA =====
+  const menuData = {
+    special: [
+      { name: 'Chicken Shawarma', price: '₨35.00', stars: '★★★★★', img: 'https://preppykitchen.com/wp-content/uploads/2021/07/Chicken-Shawarma-Feature.jpg' },
+      { name: 'Fish Curry',       price: '₨35.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsVt2p5bZiNhPJkbc0HHBaFgAvpHT4wUsUGQ&s' },
+      { name: 'Beef Burger',      price: '₨55.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=80' },
+      { name: 'Chicken Biryani',  price: '₨45.00', stars: '★★★★★', img: 'https://www.sidechef.com/recipe/6df5d24c-24a1-417a-b317-f83d949447fc.jpg?d=1408x1120' },
+      { name: 'Pasta Primavera',  price: '₨35.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_ZmYVl09T9akr16vdhV8z1l9Qr7jWuRQdow&s' },
+      { name: 'Fluffy Pancakes',  price: '₨30.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNOWOSFc3vB_kxSPWUR0HKURbuzQtv2qV0Aw&s' },
+      { name: 'Margherita Pizza', price: '₨75.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0quJ-zjG0Ksq3sUJ6sh4q_dO8SQ3hu7setQ&s' },
+      { name: 'French Fries',     price: '₨65.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkFmh0xz4tVuLFprINz7TOPvz_sSDx-gZxFg&s' },
+    ],
+    mexican: [
+      { name: 'Beef Tacos',       price: '₨40.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8ddh7C_A5gr3FQ2uulORjQxDrHTqwfrQG3w&s' },
+      { name: 'Chicken Burrito',  price: '₨50.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=300&q=80' },
+      { name: 'Guacamole Bowl',   price: '₨25.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA1ZdVmIzcLeotPMpvRAKGB8RT9qf3DE8L5Q&s' },
+      { name: 'Nachos Platter',   price: '₨45.00', stars: '★★★★★', img: 'https://static.vecteezy.com/system/resources/previews/056/894/477/large_2x/colorful-platter-of-nachos-guacamole-and-salsas-on-a-dark-stone-surface-photo.jpeg' },
+      { name: 'Quesadilla',       price: '₨35.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtYcN8ARtnkyxryI5sy5Miy6Do3JoHhCkCJA&s' },
+      { name: 'Salsa Dip',        price: '₨15.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0AmixwFg6f9Yy4kvJ6U-DttgplJaEG2IYhw&s' },
+      { name: 'Enchiladas',       price: '₨55.00', stars: '★★★★★', img: 'https://www.tasteofhome.com/wp-content/uploads/2018/01/Simple-Chicken-Enchiladas_EXPS_FT24_32264_JR_0312_3.jpg' },
+      { name: 'Mexican Rice',     price: '₨20.00', stars: '★★★★☆', img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=300&q=80' },
+    ],
+    italian: [
+      { name: 'Margherita Pizza', price: '₨75.00', stars: '★★★★★', img: 'https://www.foodandwine.com/thmb/7BpSJWDh1s-2M2ooRPHoy07apq4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/mozzarella-pizza-margherita-FT-RECIPE0621-11fa41ceb1a5465d9036a23da87dd3d4.jpg' },
+      { name: 'Pasta Primavera',  price: '₨35.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHSlu5QO0VCJ3CXg1Z5FGuYH9Ln-pGZ8b9Qw&s' },
+      { name: 'Lasagna',          price: '₨65.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ygZvJ23U8XGYDIIpaZGcTwuvUUdLJdTbSw&s' },
+      { name: 'Risotto',          price: '₨55.00', stars: '★★★★☆', img: 'https://www.foodandwine.com/thmb/AS-OFUQGHy8X5ripT2qpROgSJik=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Risotto-with-Boquerones-and-Fish-Sauce-Caramel-FT-RECIPE0423-bffbb56d78c7484f8f95c6e9156b67bf.jpg' },
+      { name: 'Tiramisu',         price: '₨30.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFCg1hAGTJzWBeWI3Pxn2Ly8jJ4Nqw-DGCog&s' },
+      { name: 'Bruschetta',       price: '₨20.00', stars: '★★★★☆', img: 'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=300&q=80https://www.simplehealthykitchen.com/wp-content/uploads/2014/08/tomato-crostini-featured.jpghttps://images.unsplash.com/photo-1612182210851-a0b3bc3b814b?w=300&q=80' },
+      { name: 'Gelato',           price: '₨25.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlTRiEYlqsRkLRS0fppLXr73XX3btDvysOew&s' },
+    ],
+    japanese: [
+      { name: 'Salmon Sushi',     price: '₨80.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1553621042-f6e147245754?w=300&q=80' },
+      { name: 'Ramen Bowl',       price: '₨60.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=300&q=80' },
+      { name: 'Tempura',          price: '₨55.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3pJ0Ni8CgbNXkw7noV0uTBCYX1rytp_KMMQ&s' },
+      { name: 'Miso Soup',        price: '₨15.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMbkQWtScCs_UtY1TsuQjM4qCFRoZprhDpQA&s' },
+      { name: 'Chicken Teriyaki', price: '₨70.00', stars: '★★★★★', img: 'https://static01.nyt.com/images/2024/02/13/multimedia/SS-Chicken-Teriyaki-ghfm/SS-Chicken-Teriyaki-ghfm-facebookJumbo.jpg' },
+      { name: 'California Roll',  price: '₨45.00', stars: '★★★★☆', img: 'https://images.unsplash.com/photo-1562802378-063ec186a863?w=300&q=80' },
+      { name: 'Gyoza Dumplings',  price: '₨35.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7ZCE9uPWOv3g-gbpx_xCq3xTbdhZgD72c3g&s' },
+      { name: 'Matcha Ice Cream', price: '₨25.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYC7j4d5ujpVxKyHqtt7Ji0NrljY-2PDh9jw&s' },
+    ],
+    drinks: [
+      { name: 'Mango Lassi',      price: '₨20.00', stars: '★★★★★', img: 'https://media.bluediamond.com/uploads/2023/01/24175942/14_Dairy-Free_Mango_Lassi-2430x1620.jpg' },
+      { name: 'Fresh Lemonade',   price: '₨15.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrKv5YCJGlSoaE8m8YpC8oQeWRiVDo20gf2Q&s' },
+      { name: 'Strawberry Shake', price: '₨25.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=300&q=80' },
+      { name: 'Iced Coffee',      price: '₨20.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0VdaadwhQnUSaTVP6hYYmuDhzILKPIO3UOQ&s' },
+      { name: 'Mint Mojito',      price: '₨18.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=300&q=80' },
+      { name: 'Orange Juice',     price: '₨15.00', stars: '★★★★★', img: 'https://sc0.blr1.cdn.digitaloceanspaces.com/article/210728-mdweesnxpu-1764590391.jpg' },
+      { name: 'Chocolate Shake',  price: '₨30.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKWBvZyWL6j76ttZmQlr856MebOHxg0E5YxA&s' },
+      { name: 'Green Tea',        price: '₨12.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuWmy5TzNbCclSnwLBZVKwYgPjYJKk5IIEdQ&s' },
+    ],
+    lunch: [
+      { name: 'Grilled Chicken',  price: '₨55.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTTvpc9a1scmLI50UP48zzNXkSBWCFGT7ZDg&s' },
+      { name: 'Caesar Salad',     price: '₨30.00', stars: '★★★★☆', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80' },
+      { name: 'Club Sandwich',    price: '₨40.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=300&q=80' },
+      { name: 'Chicken Biryani',  price: '₨45.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPcdlgGqTXb-qtbAK_WgscTy2TimgPjzn9fw&s' },
+      { name: 'Veggie Wrap',      price: '₨25.00', stars: '★★★★☆', img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=300&q=80' },
+      { name: 'Soup of the Day',  price: '₨18.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=300&q=80' },
+      { name: 'Beef Steak',       price: '₨90.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1558030006-450675393462?w=300&q=80' },
+      { name: 'Garlic Bread',     price: '₨15.00', stars: '★★★★☆', img: 'https://images.unsplash.com/photo-1573140401552-3fab0b24306f?w=300&q=80' },
+    ],
+    more: [
+      { name: 'Cheesecake',       price: '₨35.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300&q=80' },
+      { name: 'Waffles & Cream',  price: '₨40.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpT6afBN3R8iqBhVMPeDohqCND2kN1-nOhIg&s' },
+      { name: 'BBQ Ribs',         price: '₨95.00', stars: '★★★★★', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=300&q=80' },
+      { name: 'Prawn Tempura',    price: '₨75.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWNfP7rIagqzSTTSxNSEfH-_zQtIItH7AeEA&s' },
+      { name: 'Chocolate Lava',   price: '₨45.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkD7OSbyvoEzYoqjoEAjzRxlV0QUXQ7E2M9g&s' },
+      { name: 'Lamb Chops',       price: '₨110.00',stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy6UavMIh6XcHzgqFoXCd7ZxGOK3yl_NgO1g&s' },
+      { name: 'Creme Brulee',     price: '₨38.00', stars: '★★★★★', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVVtkxdTGpoxr2q9VHjoIP-y1p7HaDg_cJ8A&s' },
+      { name: 'Stuffed Mushrooms',price: '₨28.00', stars: '★★★★☆', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaRZNToBmRuGJugJnNJ1vTk4euNZn8iUpZ2A&s' },
+    ],
+  };
+
+  function renderMenu(cat) {
+    const grid = document.getElementById('menuGrid');
+    const items = menuData[cat] || [];
+    // Fade out
+    grid.style.opacity = '0';
+    grid.style.transform = 'translateY(12px)';
+    setTimeout(() => {
+      grid.innerHTML = items.map((item, i) => `
+        <div class="dish-card" style="animation: fadeInUp .35s ease ${i * 0.06}s both;">
+          <div class="dish-img-wrap" style="height:150px;">
+            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" loading="lazy"/>
+          </div>
+          <div class="p-4">
+            <h3 style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;" class="mb-1">${item.name}</h3>
+            <div class="flex mb-1"><span class="star" style="font-size:11px;">${item.stars}</span></div>
+            <div class="flex items-center justify-between">
+              <span class="font-black text-sm" style="color:var(--yellow-dark);">${item.price}</span>
+              <button class="add-cart-btn" style="font-size:11px; padding:4px 12px;" onclick="addToCart(this, '${item.name}')">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      // Fade in
+      grid.style.transition = 'opacity .3s, transform .3s';
+      grid.style.opacity = '1';
+      grid.style.transform = 'translateY(0)';
+    }, 180);
+  }
+
+  function setTab(btn, cat) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderMenu(cat);
+  }
+
+  function addToCart(btn, name) {
+    btn.textContent = '✓ Added!';
+    btn.style.background = 'var(--yellow-dark)';
+    setTimeout(() => {
+      btn.textContent = 'Add to Cart';
+      btn.style.background = '';
+    }, 1500);
+  }
+
+  // Add animation keyframe dynamically
+  const style = document.createElement('style');
+  style.textContent = `@keyframes fadeInUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }`;
+  document.head.appendChild(style);
+
+  // Render default tab on load
+  renderMenu('special');
+</script>
+</body>
+</html>
